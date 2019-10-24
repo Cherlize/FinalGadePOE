@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameEngine : MonoBehaviour
 {
-    [SerializeField] GameObject[] options = new GameObject[2];
+    [SerializeField] GameObject[] options = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class GameEngine : MonoBehaviour
 
     void Spawn()
     {
-        GameObject unit = Instantiate(options[Random.Range(0, 2)]);
+        GameObject unit = Instantiate(options[Random.Range(0, 3)]);
         unit.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
     }
 }

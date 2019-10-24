@@ -14,12 +14,5 @@ public class Wizard : Unit
         speed = 1;
         team = 3;
         gameObject.tag = "Team 3";
-        //GetComponent<MeshRenderer>().material = mat[team - 1];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

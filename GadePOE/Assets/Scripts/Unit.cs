@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected int attack;
     [SerializeField] protected float speed;
     [SerializeField] protected int team;
+    [SerializeField] protected Material[] arrMaterials;
 
     //accessors
     public int Hp { get => hp; set => hp = value; }
@@ -66,6 +67,9 @@ public class Unit : MonoBehaviour
                 break;
             case 2:
                 arrUnits = GameObject.FindGameObjectsWithTag("Team 1");     //enemy team if this unit is team 2
+                break;
+            case 3:
+                arrUnits = GameObject.FindGameObjectsWithTag("Team 3"); //wizards
                 break;
         }
 

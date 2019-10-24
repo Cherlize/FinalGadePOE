@@ -13,7 +13,7 @@ public class MeleeUnit : Unit
         range = 1;
         speed = 1;
         team = Random.Range(1, 3);
-        //GetComponent<MeshRenderer>().material = mat[team - 1];
+        GetComponent<MeshRenderer>().material = arrMaterials[team - 1];
         switch (team)
         {
             case 1:
@@ -23,11 +23,5 @@ public class MeleeUnit : Unit
                 gameObject.tag = "Team 2";
                 break;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
