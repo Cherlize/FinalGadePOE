@@ -40,9 +40,13 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if (hp > (hp * (25 / 100)))     //if above 25% hp
+            if ((hp > (hp * (25 / 100)))) //|| (hp > 0))     //if above 25% hp
             {
                 AttackMethod(NearestEnemy());       //attack enemy in range
+            }
+            else
+            {
+                //Destroy(this);
             }
         }
 
@@ -143,7 +147,7 @@ public class Unit : MonoBehaviour
     {
         if (hp <= 0)
         {
-            Destroy(thisUnit);
+            Destroy(this);
         }
     }
 }

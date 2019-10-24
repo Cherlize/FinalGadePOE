@@ -12,6 +12,15 @@ public class Factory : Building
         productionSpeed = 2 * Time.deltaTime;
         team = Random.Range(1, 3);
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];
+        switch (team)
+        {
+            case 1:
+                gameObject.tag = "Team 1";
+                break;
+            case 2:
+                gameObject.tag = "Team 2";
+                break;
+        }
     }
 
     // Update is called once per frame
