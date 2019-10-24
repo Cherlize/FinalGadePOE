@@ -13,6 +13,9 @@ public class Unit : MonoBehaviour
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
 
+    int Cooldown = 1;
+    float Timer = 0;
+
     //accessors
     public int Hp { get => hp; set => hp = value; }
     public int MaxHp { get => maxHp; }
@@ -53,10 +56,17 @@ public class Unit : MonoBehaviour
 
     protected void AttackMethod(GameObject enemy)
     {
+        Timer += Time.deltaTime;
+        if (Timer >= Cooldown)
+        {
             if (InRange(enemy))
             {
                 enemy.GetComponent<Unit>().hp -= attack;
             }
+            Timer = 0;
+        }
+
+        //healthBar.fillAmount = (float)hp / maxHP;
     }
 
     protected GameObject NearestEnemy()
@@ -82,7 +92,7 @@ public class Unit : MonoBehaviour
                 }
         }
 
-        //wizard code
+        //WIZARD CODE
         if (team == 3)
         {
             float nearest = 200;
@@ -99,7 +109,7 @@ public class Unit : MonoBehaviour
             return Unit;        //returns the nearest enemy of the oppesite team
         }
 
-        //team 1 and 2 code
+        //TEAM 1 AND 2 CODE
         float distance = 200;
 
         foreach (GameObject temp in arrUnits)       //for each unit in the array

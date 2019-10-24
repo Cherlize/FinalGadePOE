@@ -11,6 +11,7 @@ TagManager:
   - Melee
   - Wizard
   - Team 3
+  - Factory
   layers:
   - Default
   - TransparentFX
