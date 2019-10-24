@@ -9,7 +9,7 @@ public class GameEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int units = 10;
+        int units = 20;
         for (int i = 0; i < units; i++)
         {
             Spawn();

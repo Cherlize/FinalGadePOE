@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ResourceBuilding : MonoBehaviour
 {
+    [SerializeField] int resource;
+    public int numResource { get => resource; }
+
     // Start is called before the first frame update
     void Start()
     {
+        resource = Random.Range(0, 15);
         //healthBar = GetComponentsInChildren<Image>()[1];
     }
 

@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
     [SerializeField] protected float productionSpeed;
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
+   // [SerializeField] GameObject choices = new GameObject[2];
 
     protected Image healthBar;
 
@@ -30,5 +31,18 @@ public class Building : MonoBehaviour
     void Update()
     {
         
+    }
+
+    protected GameObject spawnUnit(int numResources)
+    {
+        for (int i = 0; i < (numResources); i++)
+        {
+            //spawn unit
+            numResources -= 3;
+        }
+        GameObject unit = null;
+       /* GameObject units = Instantiate(choices[Random.Range(0, 2)]);
+        units.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));*/
+        return unit;
     }
 }

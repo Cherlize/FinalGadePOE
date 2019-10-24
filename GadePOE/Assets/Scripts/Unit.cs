@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
 
-    int Cooldown = 1;
+    float Cooldown = 1;
     float Timer = 0;
     protected Image healthBar;
 
@@ -42,13 +42,21 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if ((hp > (hp * (25 / 100)))) //|| (hp > 0))     //if above 25% hp
+            if ((hp > (hp * (25 / 100))))     //if above 25% hp
             {
                 AttackMethod(NearestEnemy());       //attack enemy in range
+                if (hp <= 0)
+                {
+                    isDead();
+                }                
             }
             else
             {
-                transform.position = new Vector3(speed * Time.deltaTime, 0, speed * Time.deltaTime);        //Move away
+                if (hp <= 0)
+                {
+                    isDead();
+                }
+                transform.position = Vector3.MoveTowards(transform.position, NearestEnemy().transform.position * -1, speed * Time.deltaTime);        //Move away
             }
         }
     }
@@ -58,6 +66,7 @@ public class Unit : MonoBehaviour
     protected void AttackMethod(GameObject enemy)
     {
         Timer += Time.deltaTime;
+        Cooldown = Cooldown * speed;
         if (Timer >= Cooldown)
         {
             if (InRange(enemy))
@@ -73,7 +82,9 @@ public class Unit : MonoBehaviour
     {
         GameObject Unit = null;
 
-        GameObject[] arrTeamOneAndTwo = null;       //for wizards to attack
+        GameObject[] arrTeamOne = null;       //for wizards to attack
+        GameObject[] arrTeamTwo = null;
+        GameObject[] arrTeams = null;
         GameObject[] arrUnits = null;
 
         switch (team)       //this unit's team
@@ -86,8 +97,15 @@ public class Unit : MonoBehaviour
                 break;
             case 3:         //wizards
                 {
-                    arrTeamOneAndTwo = GameObject.FindGameObjectsWithTag("Team 1");
-                    arrTeamOneAndTwo = GameObject.FindGameObjectsWithTag("Team 2");
+                    /*arrUnits = GameObject.FindGameObjectsWithTag("Team 3");
+                    arrTeamOne = GameObject.FindGameObjectsWithTag("Team 1");
+                    arrTeamTwo = GameObject.FindGameObjectsWithTag("Team 2");
+                    var myList = new List<int>();
+                    myList.AddRange(arrTeamOne);
+                    myList.AddRange(arrTeamTwo);
+                    arrTeams =*/
+                    int OG_Size = arrTeamOne.Length;
+                    
                     break;
                 }
         }
@@ -97,7 +115,7 @@ public class Unit : MonoBehaviour
         {
             float nearest = 200;
 
-            foreach (GameObject temp in arrTeamOneAndTwo)       //for each unit in the array
+            foreach (GameObject temp in arrTeams)       //for each unit in the array
             {
                 float TempDist = Vector3.Distance(transform.position, temp.transform.position);     //check the distance between me and the unit in the array
                 if (TempDist <= nearest)       //if its nearer than the previous one
@@ -139,11 +157,8 @@ public class Unit : MonoBehaviour
         return returnVal;
     }
 
-    protected void isDead(GameObject thisUnit)
+    protected void isDead()
     {
-        if (hp <= 0)
-        {
-            Destroy(this);
-        }
+            Destroy(gameObject);
     }
 }
