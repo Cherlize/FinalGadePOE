@@ -42,6 +42,11 @@ public class Unit : MonoBehaviour
                 AttackMethod(NearestEnemy());       //attack enemy in range
             }
         }
+
+        if (team == 3)     //wizard code
+        {
+
+        }
     }
 
     //Methods
@@ -58,6 +63,7 @@ public class Unit : MonoBehaviour
     {
         GameObject Unit = null;
 
+        GameObject[] arrTeamOneAndTwo = null;       //for wizards to attack
         GameObject[] arrUnits = null;
 
         switch (team)       //this unit's team
@@ -68,11 +74,32 @@ public class Unit : MonoBehaviour
             case 2:
                 arrUnits = GameObject.FindGameObjectsWithTag("Team 1");     //enemy team if this unit is team 2
                 break;
-            case 3:
-                arrUnits = GameObject.FindGameObjectsWithTag("Team 3"); //wizards
-                break;
+            case 3:         //wizards
+                {
+                    arrTeamOneAndTwo = GameObject.FindGameObjectsWithTag("Team 1");
+                    arrTeamOneAndTwo = GameObject.FindGameObjectsWithTag("Team 2");
+                    break;
+                }
         }
 
+        //wizard code
+        if (team == 3)
+        {
+            float nearest = 200;
+
+            foreach (GameObject temp in arrTeamOneAndTwo)       //for each unit in the array
+            {
+                float TempDist = Vector3.Distance(transform.position, temp.transform.position);     //check the distance between me and the unit in the array
+                if (TempDist <= nearest)       //if its nearer than the previous one
+                {
+                    nearest = TempDist;        //update the distance
+                    Unit = temp;                //set the temp to the new closest enemy
+                }
+            }
+            return Unit;        //returns the nearest enemy of the oppesite team
+        }
+
+        //team 1 and 2 code
         float distance = 200;
 
         foreach (GameObject temp in arrUnits)       //for each unit in the array

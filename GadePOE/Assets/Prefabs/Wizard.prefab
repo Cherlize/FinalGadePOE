@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -317333843171933028}
   m_Layer: 0
   m_Name: Wizard
-  m_TagString: Wizard
+  m_TagString: Team 3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,3 +113,4 @@ MonoBehaviour:
   attack: 0
   speed: 0
   team: 0
+  arrMaterials: []
