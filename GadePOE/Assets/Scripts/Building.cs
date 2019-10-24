@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Building : MonoBehaviour
     [SerializeField] protected float productionSpeed;
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
+
+    protected Image healthBar;
 
     //accessors
     public int Hp { get => hp; set => hp = value; }

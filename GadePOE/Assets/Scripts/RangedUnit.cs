@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RangedUnit : Unit
 {
@@ -23,5 +24,6 @@ public class RangedUnit : Unit
                 gameObject.tag = "Team 2";
                 break;
         }
+        healthBar = GetComponentsInChildren<Image>()[1];
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Wizard : Unit
 {
@@ -14,5 +15,6 @@ public class Wizard : Unit
         speed = 1;
         team = 3;
         gameObject.tag = "Team 3";
+        healthBar = GetComponentsInChildren<Image>()[1];
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Unit : MonoBehaviour
 
     int Cooldown = 1;
     float Timer = 0;
+    protected Image healthBar;
 
     //accessors
     public int Hp { get => hp; set => hp = value; }
@@ -46,13 +48,8 @@ public class Unit : MonoBehaviour
             }
             else
             {
-                //Destroy(this);
+                transform.position = new Vector3(speed * Time.deltaTime, 0, speed * Time.deltaTime);        //Move away
             }
-        }
-
-        if (team == 3)     //wizard code
-        {
-
         }
     }
 
@@ -69,8 +66,7 @@ public class Unit : MonoBehaviour
             }
             Timer = 0;
         }
-
-        //healthBar.fillAmount = (float)hp / maxHP;
+        healthBar.fillAmount = (float)hp / maxHp;
     }
 
     protected GameObject NearestEnemy()

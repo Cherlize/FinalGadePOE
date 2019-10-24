@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Factory : Building
 {
@@ -21,6 +22,7 @@ public class Factory : Building
                 gameObject.tag = "Team 2";
                 break;
         }
+        healthBar = GetComponentsInChildren<Image>()[1];
     }
 
     // Update is called once per frame

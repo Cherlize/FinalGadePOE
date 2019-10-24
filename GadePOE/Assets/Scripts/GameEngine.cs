@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] options = new GameObject[4];
-  //  [SerializeField] GameObject[] buildings = new GameObject[2];
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +24,7 @@ public class GameEngine : MonoBehaviour
 
     void Spawn()
     {
-       // GameObject building = Instantiate(buildings[Random.Range(0, 3)]); 
         GameObject units = Instantiate(options[Random.Range(0, 4)]);
         units.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
-        //building.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
     }
 }
