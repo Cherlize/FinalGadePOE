@@ -12,7 +12,7 @@ public class RangedUnit : Unit
         maxHp = hp;
         attack = 1;
         range = 2;
-        speed = 0.5f;
+        speed = 1f;
         Cooldown = 5;
         team = Random.Range(1, 3);
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];

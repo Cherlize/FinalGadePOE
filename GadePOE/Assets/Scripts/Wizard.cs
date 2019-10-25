@@ -12,7 +12,7 @@ public class Wizard : Unit
         maxHp = hp;
         attack = 2;
         range = 2;
-        speed = 0.5f;
+        speed = 1f;
         team = 3;
         Cooldown = 6;
         gameObject.tag = "Team 3";
