@@ -34,4 +34,17 @@ public class Factory : Building
             isDead();
         }
     }
+
+    protected GameObject spawnUnit(int numResources)
+    {
+        for (int i = 0; i < (numResources); i++)
+        {
+            //spawn unit
+            numResources -= 3;
+        }
+        GameObject unit = null;
+        /* GameObject units = Instantiate(choices[Random.Range(0, 2)]);
+         units.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));*/
+        return unit;
+    }
 }

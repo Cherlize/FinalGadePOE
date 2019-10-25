@@ -13,6 +13,7 @@ public class RangedUnit : Unit
         attack = 1;
         range = 2;
         speed = 0.5f;
+        Cooldown = 5;
         team = Random.Range(1, 3);
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];
         switch (team)

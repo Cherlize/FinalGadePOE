@@ -14,8 +14,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
-
-    float Cooldown = 1;
+    [SerializeField] protected float cooldown;
     float Timer = 0;
     protected Image healthBar;
 
@@ -26,6 +25,7 @@ public class Unit : MonoBehaviour
     public float Speed { get => speed; }
     public int Range { get => range; }
     public int Team { get => team; }
+    public float Cooldown { get => cooldown; set => cooldown = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthBar.fillAmount = (float)hp / maxHp;
         //Movement
         if (InRange(NearestEnemy()) == false)   //enemy is not in range
         {
@@ -43,7 +44,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if ((hp > (hp * (25 / 100))))     //if above 25% hp
+            if ((hp > (maxHp * (25 / 100))))     //if above 25% hp
             {
                 AttackMethod(NearestEnemy());       //attack enemy in range
                 if (hp <= 0)
@@ -53,11 +54,11 @@ public class Unit : MonoBehaviour
             }
             else
             {
+                transform.position = Vector3.MoveTowards(transform.position, NearestEnemy().transform.position * -1, speed * Time.deltaTime);
                 if (hp <= 0)
                 {
                     isDead();
                 }
-                transform.position = Vector3.MoveTowards(transform.position, NearestEnemy().transform.position * -1, speed * Time.deltaTime);        //Move away
             }
         }
     }
@@ -67,7 +68,6 @@ public class Unit : MonoBehaviour
     protected void AttackMethod(GameObject enemy)
     {
         Timer += Time.deltaTime;
-        Cooldown = Cooldown * speed;
         if (Timer >= Cooldown)
         {
             if (InRange(enemy))
@@ -75,18 +75,16 @@ public class Unit : MonoBehaviour
                 if (enemy.name.Contains("Building"))
                 {
                     enemy.GetComponent<Building>().Hp -= attack;
-                    healthBar.fillAmount = (float)hp / maxHp;
-                    Timer = 0;
+                   
                 }
                 else
                 {
                     enemy.GetComponent<Unit>().hp -= attack;
-                    healthBar.fillAmount = (float)hp / maxHp;
-                    Timer = 0;
+                  
                 }
+                Timer = 0;
             }
         }
-        healthBar.fillAmount = (float)hp / maxHp;
     }
 
     protected GameObject NearestEnemy()
