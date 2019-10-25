@@ -10,7 +10,7 @@ public class RangedUnit : Unit
     {
         hp = 9;
         maxHp = hp;
-        attack = 3;
+        attack = 1;
         range = 2;
         speed = 0.5f;
         team = Random.Range(1, 3);

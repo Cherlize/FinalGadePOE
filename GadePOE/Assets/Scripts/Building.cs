@@ -30,7 +30,12 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    protected void isDead()
+    {
+        Destroy(gameObject);
     }
 
     protected GameObject spawnUnit(int numResources)

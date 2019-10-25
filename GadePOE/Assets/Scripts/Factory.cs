@@ -28,6 +28,10 @@ public class Factory : Building
     // Update is called once per frame
     void Update()
     {
-        
+        healthBar.fillAmount = (float)hp / maxHp;
+        if (hp <= 0)
+        {
+            isDead();
+        }
     }
 }

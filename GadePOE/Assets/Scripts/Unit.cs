@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,9 +72,19 @@ public class Unit : MonoBehaviour
         {
             if (InRange(enemy))
             {
-                enemy.GetComponent<Unit>().hp -= attack;
+                if (enemy.name.Contains("Building"))
+                {
+                    enemy.GetComponent<Building>().Hp -= attack;
+                    healthBar.fillAmount = (float)hp / maxHp;
+                    Timer = 0;
+                }
+                else
+                {
+                    enemy.GetComponent<Unit>().hp -= attack;
+                    healthBar.fillAmount = (float)hp / maxHp;
+                    Timer = 0;
+                }
             }
-            Timer = 0;
         }
         healthBar.fillAmount = (float)hp / maxHp;
     }
@@ -81,65 +92,67 @@ public class Unit : MonoBehaviour
     protected GameObject NearestEnemy()
     {
         GameObject Unit = null;
-
-        GameObject[] arrTeamOne = null;       //for wizards to attack
         GameObject[] arrTeamTwo = null;
-        GameObject[] arrTeams = null;
+        GameObject[] arrWizards = null;
+        GameObject[] arrBuildings = null;
         GameObject[] arrUnits = null;
 
         switch (team)       //this unit's team
         {
-            case 1:
-                arrUnits = GameObject.FindGameObjectsWithTag("Team 2");     //enemy team if this unit is team 1
-                break;
-            case 2:
-                arrUnits = GameObject.FindGameObjectsWithTag("Team 1");     //enemy team if this unit is team 2
-                break;
-            case 3:         //wizards
+            case 1: //Team 1
                 {
-                    /*arrUnits = GameObject.FindGameObjectsWithTag("Team 3");
-                    arrTeamOne = GameObject.FindGameObjectsWithTag("Team 1");
-                    arrTeamTwo = GameObject.FindGameObjectsWithTag("Team 2");
-                    var myList = new List<int>();
-                    myList.AddRange(arrTeamOne);
-                    myList.AddRange(arrTeamTwo);
-                    arrTeams =*/
-                    int OG_Size = arrTeamOne.Length;
                     
+                    arrUnits = GameObject.FindGameObjectsWithTag("Team 2");
+                    arrWizards = GameObject.FindGameObjectsWithTag("Team 3");
+                    int oldSize = arrUnits.Length;
+                    Array.Resize(ref arrUnits, arrUnits.Length + arrWizards.Length);
+                    for (int i = oldSize; i < arrUnits.Length; i++)
+                    {
+                        arrUnits[i] = arrWizards[i - oldSize];
+                    }
+
+                    /*For BUILDINGS
+                    arrBuildings = GameObject*/
                     break;
                 }
-        }
-
-        //WIZARD CODE
-        if (team == 3)
-        {
-            float nearest = 200;
-
-            foreach (GameObject temp in arrTeams)       //for each unit in the array
-            {
-                float TempDist = Vector3.Distance(transform.position, temp.transform.position);     //check the distance between me and the unit in the array
-                if (TempDist <= nearest)       //if its nearer than the previous one
+            case 2: //Team 2
                 {
-                    nearest = TempDist;        //update the distance
+                    arrUnits = GameObject.FindGameObjectsWithTag("Team 1");
+                    arrWizards = GameObject.FindGameObjectsWithTag("Team 3");
+                    int oldSize = arrUnits.Length;
+                    Array.Resize(ref arrUnits, arrUnits.Length + arrWizards.Length);
+                    for (int i = oldSize; i < arrUnits.Length; i++)
+                    {
+                        arrUnits[i] = arrWizards[i - oldSize];
+                    }
+                    break;
+                }
+            case 3:         //wizards
+                {
+                    arrUnits = GameObject.FindGameObjectsWithTag("Team 1");
+                    arrTeamTwo = GameObject.FindGameObjectsWithTag("Team 2");
+                    int oldSize = arrUnits.Length;      //saves original length
+                    Array.Resize(ref arrUnits, arrUnits.Length + arrTeamTwo.Length);      //resizes array to expand by array two's length
+                    for (int i = oldSize; i < arrUnits.Length; i++)
+                    {
+                        arrUnits[i] = arrTeamTwo[i - oldSize];          //starts adding from beginning of second array
+                    }
+                    break;
+                }
+        }               
+            float distance = 200;
+
+            foreach (GameObject temp in arrUnits)       //for each unit in the array, either
+            {
+                float tempDist = Vector3.Distance(transform.position, temp.transform.position);     //check the distance between us and the unit in the array
+                if (tempDist <= distance)       //if its nearer than the previous one
+                {
+                    distance = tempDist;        //update the distance
                     Unit = temp;                //set the temp to the new closest enemy
                 }
             }
-            return Unit;        //returns the nearest enemy of the oppesite team
-        }
-
-        //TEAM 1 AND 2 CODE
-        float distance = 200;
-
-        foreach (GameObject temp in arrUnits)       //for each unit in the array
-        {
-            float tempDist = Vector3.Distance(transform.position, temp.transform.position);     //check the distance between us and the unit in the array
-            if (tempDist <= distance)       //if its nearer than the previous one
-            {
-                distance = tempDist;        //update the distance
-                Unit = temp;                //set the temp to the new closest enemy
-            }
-        }
-        return Unit;        //returns the nearest enemy of the oppesite team
+            return Unit;
+                //returns the nearest enemy of the opposite team
     }
 
     protected bool InRange(GameObject enemy)

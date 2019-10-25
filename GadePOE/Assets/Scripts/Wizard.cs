@@ -17,4 +17,10 @@ public class Wizard : Unit
         gameObject.tag = "Team 3";
         healthBar = GetComponentsInChildren<Image>()[1];
     }
+
+    // Update is called once per frame
+    void update()
+    {
+
+    }
 }
