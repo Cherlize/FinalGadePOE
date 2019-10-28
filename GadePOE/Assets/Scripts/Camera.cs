@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    float speed = Time.deltaTime * 10;
+    float speed = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,24 +14,30 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cameraMove();
+        cameraZoom();
+    }
+
+    protected void cameraZoom()
+    {
+        //Camera Zoom
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+        }
+    }
+    protected void cameraMove()
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         //Camera Movement
         if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.position += new Vector3(0, 0, speed * vertical);  //move up in y axis
-        }
-
-
-
-        //Camera Zoom
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            transform.position += new Vector3(-speed * horizontal, 0, vertical);            
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            transform.position += new Vector3(+speed * horizontal, 0, vertical);
+            transform.position += new Vector3(speed * Time.deltaTime * horizontal, 0, speed * Time.deltaTime * vertical);
         }
     }
 }
