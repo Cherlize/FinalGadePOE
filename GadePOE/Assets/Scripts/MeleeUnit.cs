@@ -15,7 +15,7 @@ public class MeleeUnit : Unit
         range = 1;
         speed = 1.5f;
         team = Random.Range(1, 3);
-        Cooldown = 2;
+        Cooldown = 3;
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];
         switch (team)
         {

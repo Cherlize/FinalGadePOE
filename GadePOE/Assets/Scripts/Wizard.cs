@@ -17,7 +17,7 @@ public class Wizard : Unit
         range = 3;
         speed = 2f;
         team = 3;
-        Cooldown = 3;
+        Cooldown = 4;
         gameObject.tag = "Team 3";
         healthBar = GetComponentsInChildren<Image>()[1];
     }
