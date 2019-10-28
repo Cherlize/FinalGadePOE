@@ -34,10 +34,7 @@ public class Camera : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        //Camera Movement
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            transform.position += new Vector3(speed * Time.deltaTime * horizontal, 0, speed * Time.deltaTime * vertical);
-        }
+
+        transform.position += new Vector3(speed * Time.deltaTime * horizontal, 0, speed * Time.deltaTime * vertical);
     }
 }
