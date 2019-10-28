@@ -17,7 +17,7 @@ public class Wizard : Unit
         range = 3;
         speed = 2f;
         team = 3;
-        Cooldown = 4;
+        Cooldown = 3;
         gameObject.tag = "Team 3";
         healthBar = GetComponentsInChildren<Image>()[1];
     }
@@ -25,6 +25,7 @@ public class Wizard : Unit
     // Update is called once per frame for the AoE attack
     void update()
     {
+        healthBar.fillAmount = (float)hp / maxHp;
         //Movement
         GameObject[] enemies = NearestEnemies();
         foreach (GameObject e in enemies)

@@ -33,6 +33,12 @@ public class ResourceBuilding : Building
     // Update is called once per frame
     void Update()
     {
+        healthBar.fillAmount = (float)hp / maxHp;
+        if (hp <= 0)
+        {
+            isDead();
+        }
+
         GameObject[] enemies = null;
         enemies = allEnemies(team);       //which team is the enemy?
         foreach (GameObject e in enemies)

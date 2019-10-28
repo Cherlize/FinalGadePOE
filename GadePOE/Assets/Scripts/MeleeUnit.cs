@@ -13,9 +13,9 @@ public class MeleeUnit : Unit
         maxHp = hp;
         attack = 2;
         range = 1;
-        speed = 1f;
+        speed = 1.5f;
         team = Random.Range(1, 3);
-        Cooldown = 4;
+        Cooldown = 2;
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];
         switch (team)
         {
