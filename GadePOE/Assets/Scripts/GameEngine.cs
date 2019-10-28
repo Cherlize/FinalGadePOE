@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameEngine : MonoBehaviour
 {
-    [SerializeField] GameObject[] options = new GameObject[4];
+    [SerializeField] GameObject[] options = new GameObject[5];
 
     // Start is called before the first frame update
     void Start()
     {
-        int units = 20;
+        int units = 15;
         for (int i = 0; i < units; i++)
         {
             Spawn();
@@ -24,7 +24,7 @@ public class GameEngine : MonoBehaviour
 
     void Spawn()
     {
-        GameObject units = Instantiate(options[Random.Range(0, 4)]);
+        GameObject units = Instantiate(options[Random.Range(0, 5)]);
         units.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
     }
 }

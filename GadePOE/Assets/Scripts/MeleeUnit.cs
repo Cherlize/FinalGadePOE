@@ -9,10 +9,11 @@ public class MeleeUnit : Unit
     void Start()
     {
         hp = 10;
+        areYouDead = false;
         maxHp = hp;
         attack = 2;
         range = 1;
-        speed = 2f;
+        speed = 1f;
         team = Random.Range(1, 3);
         Cooldown = 4;
         GetComponent<MeshRenderer>().material = arrMaterials[team - 1];

@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected int team;
     [SerializeField] protected Material[] arrMaterials;
     [SerializeField] protected float cooldown;
+    [SerializeField] protected bool areYouDead;
     float Timer = 0;
     protected Image healthBar;
 
@@ -26,6 +27,7 @@ public class Unit : MonoBehaviour
     public int Range { get => range; }
     public int Team { get => team; }
     public float Cooldown { get => cooldown; set => cooldown = value; }
+    public bool AreYouDead { get => areYouDead; set => areYouDead = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if ((hp > (maxHp * (25 / 100))))     //if above 25% hp
+            if (hp > (maxHp * (25 / 100)))     //if above 25% hp
             {
                 AttackMethod(NearestEnemy());       //attack enemy in range
                 if (hp <= 0)
@@ -92,7 +94,6 @@ public class Unit : MonoBehaviour
         GameObject Unit = null;
         GameObject[] arrTeamTwo = null;
         GameObject[] arrWizards = null;
-        GameObject[] arrBuildings = null;
         GameObject[] arrUnits = null;
 
         switch (team)       //this unit's team
@@ -108,9 +109,6 @@ public class Unit : MonoBehaviour
                     {
                         arrUnits[i] = arrWizards[i - oldSize];
                     }
-
-                    /*For BUILDINGS
-                    arrBuildings = GameObject*/
                     break;
                 }
             case 2: //Team 2
@@ -171,5 +169,6 @@ public class Unit : MonoBehaviour
     protected void isDead()
     {
             Destroy(gameObject);
+        areYouDead = true;
     }
 }

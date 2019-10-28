@@ -9,6 +9,7 @@ public class RangedUnit : Unit
     void Start()
     {
         hp = 9;
+        areYouDead = false;
         maxHp = hp;
         attack = 1;
         range = 2;

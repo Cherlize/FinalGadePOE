@@ -8,6 +8,7 @@ public class Factory : Building
     // Start is called before the first frame update
     void Start()
     {
+        areYouDead = false;
         hp = 20;
         maxHp = hp;
         productionSpeed = 2 * Time.deltaTime;
@@ -46,5 +47,14 @@ public class Factory : Building
         /* GameObject units = Instantiate(choices[Random.Range(0, 2)]);
          units.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));*/
         return unit;
+    }
+    protected GameObject nearestResourceBuilding(int team)
+    {
+        GameObject resourceBuilding = null;
+        /*if (team == 1)
+        {
+            resourceBuilding = find
+        }*/
+        return resourceBuilding;
     }
 }

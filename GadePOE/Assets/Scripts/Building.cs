@@ -10,6 +10,7 @@ public class Building : MonoBehaviour
     [SerializeField] protected int maxHp;
     [SerializeField] protected float productionSpeed;
     [SerializeField] protected int team;
+    [SerializeField] protected bool areYouDead;
     [SerializeField] protected Material[] arrMaterials;
    // [SerializeField] GameObject choices = new GameObject[2];
 
@@ -20,6 +21,7 @@ public class Building : MonoBehaviour
     public int MaxHp { get => maxHp; }
     public float ProductionSpeed { get => productionSpeed; }
     public int Team { get => team; }
+    public bool AreYouDead { get => areYouDead; set => areYouDead = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +29,15 @@ public class Building : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    /* Update is called once per frame
     void Update()
     {
 
-    }
+    }*/
 
     protected void isDead()
     {
         Destroy(gameObject);
+        areYouDead = true;
     }
 }

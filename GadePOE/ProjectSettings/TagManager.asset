@@ -12,6 +12,7 @@ TagManager:
   - Wizard
   - Team 3
   - Factory
+  - ResourceText
   layers:
   - Default
   - TransparentFX
